@@ -3,14 +3,23 @@ import { Link, routes } from '@redwoodjs/router'
 const AboutPage = () => {
   return (
     <>
-      <h1>AboutPage</h1>
-      <p>
-        Find me in <tt>./web/src/pages/AboutPage/AboutPage.js</tt>
-      </p>
-      <p>
-        My default route is named <tt>about</tt>, link to me with `
-        <Link to={routes.about()}>About</Link>`
-      </p>
+      <header>
+        <h1>Redwood Blog</h1>
+        <nav>
+          <ul>
+            <li>
+              <Link to={routes.about()}>About</Link>
+            </li>
+          </ul>
+        </nav>
+      </header>
+      <main>
+        <p>
+          This site was created to demonstrate my mastery of Redwood: Look on my
+          works, ye mighty, and despair!
+        </p>
+        <Link to={routes.home()}>Return home</Link>
+      </main>
     </>
   )
 }
