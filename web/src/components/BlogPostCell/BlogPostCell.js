@@ -1,3 +1,5 @@
+import BlogPost from "../BlogPost/BlogPost"
+
 export const QUERY = gql`
   query BlogPostQuery($id: Int!) {
     post(id: $id) {
@@ -16,5 +18,7 @@ export const Empty = () => <div>Empty</div>
 export const Failure = ({ error }) => <div>Error: {error.message}</div>
 
 export const Success = ({ post }) => {
-  return JSON.stringify(post)
+  return (
+    <BlogPost key={post.id} post={post} />
+  )
 }
