@@ -15,7 +15,7 @@ const ContactPage = () => {
 
   return (
     <BlogLayout>
-      <Form onSubmit={onSubmit}>
+      <Form onSubmit={onSubmit} validation={{ mode: 'onBlur' }}>
         <Label name="name" errorClassName="error">
           Name
         </Label>
@@ -31,7 +31,13 @@ const ContactPage = () => {
         </Label>
         <TextField
           name="email"
-          validation={{ required: true }}
+          validation={{
+            required: true,
+            pattern: {
+              value: /[^@]+@[^.]+\..+/,
+              message: 'Please enter a valid email address',
+            },
+          }}
           errorClassName="error"
         />
         <FieldError name="email" className="error" />
