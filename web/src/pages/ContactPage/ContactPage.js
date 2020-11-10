@@ -5,10 +5,12 @@ import {
   Submit,
   FieldError,
   Label,
+  FormError
 } from '@redwoodjs/forms'
 
 import BlogLayout from 'src/layouts/BlogLayout'
 import { useMutation, Flash, useFlash } from '@redwoodjs/web'
+import { useForm } from 'react-hook-form'
 
 const CREATE_CONTACT = gql`
   mutation CreateContactMutation($input: CreateContactInput!) {
@@ -25,8 +27,12 @@ const ContactPage = () => {
       addMessage('Thank you for your submission!', {
         style: { backgroundColor: 'green', color: 'white', padding: '1rem' }
       })
+      formMethods.reset()
+
     },
   });
+  const formMethods = useForm({ mode: 'onBlur'});
+
   const onSubmit = (data) => {
     create({ variables: { input: data }});
   }
@@ -34,7 +40,11 @@ const ContactPage = () => {
   return (
     <BlogLayout>
       <Flash timeout={2000} />
-      <Form onSubmit={onSubmit} validation={{ mode: 'onBlur' }}>
+      <Form onSubmit={onSubmit} error={error} formMethods={formMethods}>
+        <FormError
+          error={error}
+          wrapperStyle={{ color: 'red', backgroundColor: 'lavenderblush' }}
+        />
         <Label name="name" errorClassName="error">
           Name
         </Label>
